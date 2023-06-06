@@ -7,7 +7,8 @@ class CheckCandleSymbol:
         self.calculationsData = CalculationsData()
         self.r = 0
 
-    def is_doji(self, row):
+    @staticmethod
+    def is_doji(row):
         data_company = DataCompany()
         body = data_company.get_body(row)
         diff = data_company.get_high(row) - data_company.get_low(row)
@@ -17,7 +18,8 @@ class CheckCandleSymbol:
         else:
             return False
 
-    def is_hammer_hanging_man(self, row):
+    @staticmethod
+    def is_hammer_hanging_man(row):
         data_company = DataCompany()
         down_shadow = data_company.get_down_shadow(row)
         up_shadow = data_company.get_up_shadow(row)
@@ -29,24 +31,16 @@ class CheckCandleSymbol:
 
     def is_bearish_engulfing(self, row1, row2):
         if (self.calculationsData.candle_status(row1) != -1 or self.is_doji(
-                row1) == True) and self.calculationsData.candle_status(row2) == -1 and self.calculationsData.cover2to1(
-            row1,
-            row2) == True:
+                row1)) and self.calculationsData.candle_status(row2) == -1 and\
+                self.calculationsData.cover2to1(row1, row2):
             return True
         else:
             return False
 #
- #   (
-  #  'SepehrSaderat.Inv.', '20230201', '8200.00', '8520.00', '7850.00', '8130.00', '53398853190', '6592424', '1827', 'D',
-   # '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات')
-   # ('SepehrSaderat.Inv.', '20230219', '4119.00', '4119.00', '3700.00', '3848.00', '5050484693', '1329910', '400', 'D',
-    # '3850.00', '3788.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات')
-    #
+
     def is_bullish_engulfing(self, row1, row2):
-        if (self.calculationsData.candle_status(row1) != 1 or self.is_doji(
-                row1) == True) and self.calculationsData.candle_status(row2) == 1 and self.calculationsData.cover2to1(
-            row1,
-            row2) == True:
+        if (self.calculationsData.candle_status(row1) != 1 or self.is_doji(row1)) and \
+                self.calculationsData.candle_status(row2) == 1 and self.calculationsData.cover2to1(row1, row2):
             return True
         else:
             return False
@@ -54,8 +48,7 @@ class CheckCandleSymbol:
     def is_bullish_hammer_engulfing(self, row1, row2):
         if self.calculationsData.candle_status(row1) != 1 and self.calculationsData.candle_status(
                 row2) == 1 and self.calculationsData.cover2to1(row1,
-                                                               row2) == True and self.is_hammer_hanging_man(
-            row1) == True:
+                                                               row2) and self.is_hammer_hanging_man(row1):
             return True
         else:
             return False
@@ -63,8 +56,7 @@ class CheckCandleSymbol:
     def is_bearish_hammer_engulfing(self, row1, row2):
         if self.calculationsData.candle_status(row1) != -1 and self.calculationsData.candle_status(
                 row2) == -1 and self.calculationsData.cover2to1(row1,
-                                                                row2) == True and self.is_hammer_hanging_man(
-            row1) == True:
+                                                                row2) and self.is_hammer_hanging_man(row1):
             return True
         else:
             return False
@@ -93,7 +85,8 @@ class CheckCandleSymbol:
         else:
             return False
 
-    def without_shadow(self, row):
+    @staticmethod
+    def without_shadow(row):
         data_company = DataCompany()
         down_shadow = data_company.get_down_shadow(row)
         up_shadow = data_company.get_up_shadow(row)
@@ -124,13 +117,14 @@ class CheckCandleSymbol:
             return False
 
     def is_full_time_queue(self, row):
-        if self.full_time_sell_queue(row) == True or self.full_time_buy_queue(
-                row) == True:
+        if self.full_time_sell_queue(row) or self.full_time_buy_queue(
+                row):
             return True
         else:
             return False
 
-    def is_full_time_queue_with_shadow(self, row):
+    @staticmethod
+    def is_full_time_queue_with_shadow(row):
         data_company = DataCompany()
         if data_company.get_first(row) == data_company.get_last(row) and data_company.get_low(
                 row) < data_company.get_first(row):
@@ -138,7 +132,8 @@ class CheckCandleSymbol:
         else:
             return False
 
-    def is_bearish(self, rows):
+    @staticmethod
+    def is_bearish(rows):
         data_company = DataCompany()
         max = data_company.get_close(rows[0])
         for i in rows:

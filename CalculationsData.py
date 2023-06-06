@@ -3,6 +3,9 @@ from DataCompany import DataCompany
 
 class CalculationsData:
 
+    def __init__(self):
+        self.r = 0
+
     def candle_status(self, row):  # common
         if float(row[11]) > float(row[2]):
             return 1  # green
