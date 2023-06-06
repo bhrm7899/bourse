@@ -1,13 +1,12 @@
 from unittest import TestCase
-import CalculationsData
+from CalculationsData import CalculationsData
 
 
 class TestCalculationsData(TestCase):
-    calculationsData = CalculationsData()
     def test_candle_status(self):
         row = ['SepehrSaderat.Inv.', '20230201', '8200.00', '8520.00', '7850.00', '8130.00', '53398853190', '6592424',
                '1827', 'D', '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات']
-        self.assertEqual(calculationsData.candle_status(row), 1)
+        self.assertEqual(CalculationsData.candle_status(row), -1)
     #
     # def test_day_status(self):
     #     self.fail()

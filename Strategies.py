@@ -55,7 +55,7 @@ class Strategies:
             date_index = self.check(company)
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.is_bullish_engulfing(company[-date_index - 1],
-                                                                                    company[-date_index]) == True:
+                                                                                    company[-date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -84,7 +84,7 @@ class Strategies:
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.is_bullish_hammer_engulfing(company[-date_index - 1],
                                                                                            company[
-                                                                                               -date_index]) == True:
+                                                                                               -date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -98,8 +98,8 @@ class Strategies:
             if len(company) > date_index + 10:
                 if date_index != -1 and self.checkCandleSymbol.is_bullish_engulfing(company[-date_index - 1],
                                                                                     company[
-                                                                                        -date_index]) == True and self.checkCandleSymbol.is_bearish(
-                    company[-date_index - 3: -date_index - 1]) == True:
+                                                                                        -date_index]) and self.checkCandleSymbol.is_bearish(
+                    company[-date_index - 3: -date_index - 1]):
                     count += 1
                     print(count, " : ", i)
 
@@ -113,8 +113,8 @@ class Strategies:
             if len(company) > date_index + 10:
                 if date_index != -1 and self.checkCandleSymbol.is_bullish_hammer_engulfing(company[-date_index - 1],
                                                                                            company[
-                                                                                               -date_index]) == True and self.checkCandleSymbol.is_bearish(
-                    company[-date_index - 3: -date_index - 1]) == True:
+                                                                                               -date_index]) and self.checkCandleSymbol.is_bearish(
+                    company[-date_index - 3: -date_index - 1]):
                     count += 1
                     print(count, " : ", i)
 
@@ -129,8 +129,8 @@ class Strategies:
                 vol1 = self.data_company.get_volume(company[-1])
                 if date_index != -1 and self.checkCandleSymbol.is_bullish_engulfing(company[-date_index - 1],
                                                                                     company[
-                                                                                        -date_index]) == True and self.checkCandleSymbol.is_bearish(
-                    company[-date_index - 3:-date_index - 1]) == True and vol1 > (
+                                                                                        -date_index]) and self.checkCandleSymbol.is_bearish(
+                    company[-date_index - 3:-date_index - 1]) and vol1 > (
                         1.5 * self.calculationsData.avg_volume(company[-date_index - 29: -date_index - 1])):
                     count += 1
                     print(count, " : ", i)
@@ -144,7 +144,7 @@ class Strategies:
             date_index = self.check(company)
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.is_piercing_pattern(company[-date_index - 1],
-                                                                                   company[-date_index]) == True:
+                                                                                   company[-date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -158,8 +158,8 @@ class Strategies:
             if len(company) > date_index + 10:
                 if date_index != -1 and self.checkCandleSymbol.is_piercing_pattern(company[-date_index - 1],
                                                                                    company[
-                                                                                       -date_index]) == True and self.checkCandleSymbol.is_bearish(
-                    company[-date_index - 3:-date_index - 1]) == True:
+                                                                                       -date_index]) and self.checkCandleSymbol.is_bearish(
+                    company[-date_index - 3:-date_index - 1]):
                     count += 1
                     print(count, " : ", i)
 
@@ -174,8 +174,8 @@ class Strategies:
                 vol1 = self.data_company.get_volume(company[-1])
                 if date_index != -1 and self.checkCandleSymbol.is_piercing_pattern(company[-date_index - 1],
                                                                                    company[
-                                                                                       -date_index]) == True and self.checkCandleSymbol.is_bearish(
-                    company[-date_index - 3:-date_index - 1]) == True and vol1 > (
+                                                                                       -date_index]) and self.checkCandleSymbol.is_bearish(
+                    company[-date_index - 3:-date_index - 1]) and vol1 > (
                         1.5 * self.calculationsData.avg_volume(company[-date_index - 29:-date_index - 1])):
                     count += 1
                     print(count, " : ", i)
@@ -191,8 +191,8 @@ class Strategies:
                 if date_index != -1 and self.checkCandleSymbol.is_morning_star(company[-date_index - 2],
                                                                                company[-date_index - 1],
                                                                                company[
-                                                                                   -date_index]) == True and self.checkCandleSymbol.is_bearish(
-                    company[-date_index - 5:-date_index - 3]) == True:
+                                                                                   -date_index]) and self.checkCandleSymbol.is_bearish(
+                    company[-date_index - 5:-date_index - 3]):
                     count += 1
                     print(count, " : ", i)
 
@@ -205,7 +205,7 @@ class Strategies:
             date_index = self.check(company)
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.is_bearish_engulfing(company[-date_index - 1],
-                                                                                    company[-date_index]) == True:
+                                                                                    company[-date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -219,7 +219,7 @@ class Strategies:
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.is_bearish_hammer_engulfing(company[-date_index - 1],
                                                                                            company[
-                                                                                               -date_index]) == True:
+                                                                                               -date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -231,7 +231,7 @@ class Strategies:
             company = self.getDataDB.final_data[i]
             date_index = self.check(company)
             if len(company) > date_index + 2:
-                if date_index != -1 and self.checkCandleSymbol.full_time_buy_queue(company[-date_index]) == True:
+                if date_index != -1 and self.checkCandleSymbol.full_time_buy_queue(company[-date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -243,7 +243,7 @@ class Strategies:
             company = self.getDataDB.final_data[i]
             date_index = self.check(company)
             if len(company) > date_index + 2:
-                if date_index != -1 and self.checkCandleSymbol.full_time_sell_queue(company[-date_index]) == True:
+                if date_index != -1 and self.checkCandleSymbol.full_time_sell_queue(company[-date_index]):
                     count += 1
                     print(count, " : ", i)
 
@@ -256,7 +256,7 @@ class Strategies:
             date_index = self.check(company)
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.is_full_time_queue_with_shadow(
-                        company[-date_index]) == True:
+                        company[-date_index]):
                     count += 1
                     print(count, " : ", i)
 
