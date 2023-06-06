@@ -5,14 +5,13 @@ from CheckCandleSymbol import CheckCandleSymbol
 
 class TestCheckCandleSymbol(TestCase):
     def test_is_doji(self):
-        row = ['SepehrSaderat.Inv.', '20230201', '8200.00', '8520.00', '7850.00', '8130.00', '53398853190', '6592424', '1827', 'D',
-        '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات']
+        row = ['SepehrSaderat.Inv.', '20230201', '8200.00', '8520.00', '7850.00', '8130.00', '53398853190', '6592424',
+               '1827', 'D', '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات']
         self.assertFalse(CheckCandleSymbol.is_doji(row))
 
     def test_is_hammer_hanging_man(self):
         row = ['SepehrSaderat.Inv.', '20230201', '8200.00', '8520.00', '7850.00', '8130.00', '53398853190', '6592424',
-               '1827', 'D',
-               '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات']
+               '1827', 'D', '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات']
         self.assertFalse(CheckCandleSymbol.is_hammer_hanging_man(row))
 
     # def test_is_bearish_engulfing(self):

@@ -1,5 +1,3 @@
-
-import csv
 import sqlite3
 
 if __name__ == '__main__':
@@ -17,7 +15,6 @@ if __name__ == '__main__':
 
         import requests
         
-        # request the image url
         id = "http://www.tsetmc.com/tsev2/data/Export-txt.aspx?t=i&a=1&b=0&i={addres}".format(addres=row[1])
         print("trying")
         downloaded_file = requests.get(id)
@@ -31,7 +28,7 @@ if __name__ == '__main__':
         # close file
         save_file.close()
         count = count + 1
-        print("Number : " , count)
+        print("Number : ", count)
 
     print("Download finished")
 

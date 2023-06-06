@@ -13,28 +13,36 @@ class DataCompany:
     def __init__(self):
         self.row = None
 
-    def get_first(self, row):
+    @staticmethod
+    def get_first(row):
         return float(row[2])
 
-    def get_last(self, row):
+    @staticmethod
+    def get_last(row):
         return float(row[11])
 
-    def get_low(self, row):
+    @staticmethod
+    def get_low(row):
         return float(row[4])
 
-    def get_high(self, row):
+    @staticmethod
+    def get_high(row):
         return float(row[3])
 
-    def get_open(self, row):
+    @staticmethod
+    def get_open(row):
         return float(row[10])
 
-    def get_close(self, row):
+    @staticmethod
+    def get_close(row):
         return float(row[5])
 
-    def get_volume(self, row):
+    @staticmethod
+    def get_volume(row):
         return int(row[7])
 
-    def get_date(self, row):
+    @staticmethod
+    def get_date(row):
         return int(row[1])
 
     def get_down_shadow(self, row):
