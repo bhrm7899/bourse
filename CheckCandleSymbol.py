@@ -35,7 +35,13 @@ class CheckCandleSymbol:
             return True
         else:
             return False
-
+#
+ #   (
+  #  'SepehrSaderat.Inv.', '20230201', '8200.00', '8520.00', '7850.00', '8130.00', '53398853190', '6592424', '1827', 'D',
+   # '8160.00', '7960.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات')
+   # ('SepehrSaderat.Inv.', '20230219', '4119.00', '4119.00', '3700.00', '3848.00', '5050484693', '1329910', '400', 'D',
+    # '3850.00', '3788.00', '114312662654155', 'وسپهر', 'سرمايه گذاري مالي سپهرصادرات')
+    #
     def is_bullish_engulfing(self, row1, row2):
         if (self.calculationsData.candle_status(row1) != 1 or self.is_doji(
                 row1) == True) and self.calculationsData.candle_status(row2) == 1 and self.calculationsData.cover2to1(
