@@ -1,8 +1,9 @@
+from colorama import Fore
+
 from CalculationsData import CalculationsData
 from CheckCandleSymbol import CheckCandleSymbol
-from Const import Const
-
 # DataBase Functions
+from CustomPrinter import CustomPrinter
 from DataCompany import DataCompany
 
 
@@ -16,7 +17,7 @@ class Strategies:
 
     def find_today(self):
 
-        self.bullish_engulfing_print()
+        name_bullish, count_bullish = self.bullish_engulfing()
 
         self.bullish_engulfing_with_five_min_percent_body()
 
@@ -36,7 +37,7 @@ class Strategies:
 
         self.bearish_and_morning_star()
 
-        self.bearish_engulfing_print()
+        name_bearish, count_bearish = self.bearish_engulfing()
 
         self.hammer_and_bearish_engulfing()
 
@@ -46,10 +47,14 @@ class Strategies:
 
         self.full_time_buy_queue_with_shadow()
 
-    def bullish_engulfing_print(self):
-        print(Const.star)
+        if count_bearish * 1.3 < count_bullish:
+            CustomPrinter.println('fuck you', Fore.BLUE)
+        else:
+            CustomPrinter.println('fuck', Fore.BLUE)
+
+    def bullish_engulfing(self):
         count = 0
-        print("Bullish engulfing print :")  # pass
+        CustomPrinter.println("Bullish engulfing print :", Fore.RED)  # pass
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -58,15 +63,15 @@ class Strategies:
                 if date_index != -1 and self.checkCandleSymbol.is_bullish_engulfing(company[-date_index - 1],
                                                                                     company[-date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
-        return results
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
+        return results, count
 
     def bullish_engulfing_with_five_min_percent_body(self):
-        print(Const.star)
         count = 0
-        print("Bullish engulfing with min 5 percent body print :")  # pass
+        CustomPrinter.println("Bullish engulfing with min 5 percent body print :", Fore.RED)  # pass
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -77,15 +82,15 @@ class Strategies:
                                                                                         -date_index]) and \
                         self.calculationsData.min_body_bullish(company[-date_index], 5):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def hammer_and_bullish_engulfing(self):
-        print(Const.star)
         count = 0
-        print("hammer and bullish engulfing :")  # pass
+        CustomPrinter.println("hammer and bullish engulfing :", Fore.RED)  # pass
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -95,15 +100,15 @@ class Strategies:
                                                                                            company[
                                                                                                -date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def bearish_and_engulfing(self):
-        print(Const.star)
         count = 0
-        print("is bearish and engulfing :")
+        CustomPrinter.println("is bearish and engulfing :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -114,15 +119,15 @@ class Strategies:
                                                                                         -date_index]) \
                         and self.checkCandleSymbol.is_bearish(company[-date_index - 3: -date_index - 1]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def bearish_and_hammer_and_engulfing(self):
-        print(Const.star)
         count = 0
-        print("is bearish and hammer and engulfing :")
+        CustomPrinter.println("is bearish and hammer and engulfing :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -133,15 +138,15 @@ class Strategies:
                                                                                                -date_index]) \
                         and self.checkCandleSymbol.is_bearish(company[-date_index - 3: -date_index - 1]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def bearish_and_engulfing_and_volume(self):
-        print(Const.star)
         count = 0
-        print("is bearish and engulfing and volume:")
+        CustomPrinter.println("is bearish and engulfing and volume:", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -154,15 +159,15 @@ class Strategies:
                         and self.checkCandleSymbol.is_bearish(company[-date_index - 3:-date_index - 1]) and vol1 > (
                         1.5 * self.calculationsData.avg_volume(company[-date_index - 29: -date_index - 1])):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def piercing_pattern_print(self):
-        print(Const.star)
         count = 0
-        print("piercingPattern print :")  # pass
+        CustomPrinter.println("piercingPattern print :", Fore.RED)  # pass
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -171,15 +176,15 @@ class Strategies:
                 if date_index != -1 and self.checkCandleSymbol.is_piercing_pattern(company[-date_index - 1],
                                                                                    company[-date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def bearish_and_piercing_pattern(self):
-        print(Const.star)
         count = 0
-        print("is bearish and piercingPattern :")
+        CustomPrinter.println("is bearish and piercingPattern :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -190,15 +195,15 @@ class Strategies:
                                                                                        -date_index]) and \
                         self.checkCandleSymbol.is_bearish(company[-date_index - 3:-date_index - 1]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def bearish_and_piercing_pattern_and_volume(self):
-        print(Const.star)
         count = 0
-        print("is bearish and piercingPattern and volume:")
+        CustomPrinter.println("is bearish and piercingPattern and volume:", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -211,15 +216,15 @@ class Strategies:
                         self.checkCandleSymbol.is_bearish(company[-date_index - 3:-date_index - 1]) and vol1 > (
                         1.5 * self.calculationsData.avg_volume(company[-date_index - 29:-date_index - 1])):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def bearish_and_morning_star(self):
-        print(Const.star)
         count = 0
-        print("is bearish and MorningStar :")
+        CustomPrinter.println("is bearish and MorningStar :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -231,15 +236,15 @@ class Strategies:
                                                                                    -date_index]) and \
                         self.checkCandleSymbol.is_bearish(company[-date_index - 5:-date_index - 3]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
-    def bearish_engulfing_print(self):
-        print(Const.star)
+    def bearish_engulfing(self):
         count = 0
-        print("Bearish engulfing print :")
+        CustomPrinter.println("Bearish engulfing print :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -248,15 +253,15 @@ class Strategies:
                 if date_index != -1 and self.checkCandleSymbol.is_bearish_engulfing(company[-date_index - 1],
                                                                                     company[-date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
-        return results
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
+        return results, count
 
     def hammer_and_bearish_engulfing(self):
-        print(Const.star)
         count = 0
-        print("hammer and bearish engulfing :")
+        CustomPrinter.println("hammer and bearish engulfing :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -266,15 +271,15 @@ class Strategies:
                                                                                            company[
                                                                                                -date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def full_time_buy_queue(self):
-        print(Const.star)
         count = 0
-        print("fullTime buyQueue :")
+        CustomPrinter.println("fullTime buyQueue :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -282,15 +287,15 @@ class Strategies:
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.full_time_buy_queue(company[-date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def full_time_sell_queue(self):
-        print(Const.star)
         count = 0
-        print("fullTime sellQueue :")
+        CustomPrinter.println("fullTime sellQueue :", Fore.RED)
         results = []
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -298,15 +303,15 @@ class Strategies:
             if len(company) > date_index + 2:
                 if date_index != -1 and self.checkCandleSymbol.full_time_sell_queue(company[-date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def full_time_buy_queue_with_shadow(self):
-        print(Const.star)
         count = 0
-        print("fullTime buyQueue with shadow :")
+        CustomPrinter.println("fullTime buyQueue with shadow :", Fore.RED)
         results = list()
         for i in self.getDataDB.stock_names:
             company = self.getDataDB.final_data[i]
@@ -315,9 +320,10 @@ class Strategies:
                 if date_index != -1 and self.checkCandleSymbol.is_full_time_queue_with_shadow(
                         company[-date_index]):
                     count += 1
-                    result = count, " : ", i
+                    result = i + " : " + str(count)
                     results.append(result)
-                    print(result)
+                    CustomPrinter.print(i, Fore.CYAN)
+                    CustomPrinter.println("   : " + str(count), Fore.YELLOW)
         return results
 
     def check(self, company):

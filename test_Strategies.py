@@ -16,9 +16,9 @@ class TestStrategies(TestCase):
     getDataDB.get_names_of_companies_and_store(cursor)
     getDataDB.get_all_datas_and_store(cursor)
 
-    def test_bullish_engulfing_print(self):
+    def test_bullish_engulfing(self):
         stg = Strategies(20230219, self.getDataDB)
-        result = stg.bullish_engulfing_print()
+        result = stg.bullish_engulfing()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'زماهان'), (3, ' : ', 'فخاس'), (4, ' : ', 'زكشت'),
                     (5, ' : ', 'تسه0001'), (6, ' : ', 'بالاس'), (7, ' : ', 'سيتا'), (8, ' : ', 'كخاك'),
                     (9, ' : ', 'فالوم'), (10, ' : ', 'شغدير'), (11, ' : ', 'كپرور'), (12, ' : ', 'زدشت'),
@@ -120,9 +120,9 @@ class TestStrategies(TestCase):
                     (13, ' : ', 'زبينا'), (14, ' : ', 'دارا يكم'), (15, ' : ', 'كاردان'), (16, ' : ', 'كاريس')]
         self.assertEqual(result, expected)
 
-    def test_bearish_engulfing_print(self):
+    def test_bearish_engulfing(self):
         stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_engulfing_print()
+        result = stg.bearish_engulfing()
         expected = [(1, ' : ', 'تكنو'), (2, ' : ', 'دسبحان'), (3, ' : ', 'سكارون'), (4, ' : ', 'ثاميد'),
                     (5, ' : ', 'شپديس'), (6, ' : ', 'حتوكا'), (7, ' : ', 'ولغدر'), (8, ' : ', 'وسنا'),
                     (9, ' : ', 'غشان'), (10, ' : ', 'وپارس'), (11, ' : ', 'سمازن'), (12, ' : ', 'آسام'),
