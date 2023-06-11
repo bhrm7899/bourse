@@ -1,5 +1,7 @@
 import sqlite3
 
+import requests
+
 if __name__ == '__main__':
 
     # create a data structure
@@ -12,17 +14,14 @@ if __name__ == '__main__':
     rows = cursor.fetchall()
     print("Download started")
     for row in rows:
-
-        import requests
-        
-        id = "http://www.tsetmc.com/tsev2/data/Export-txt.aspx?t=i&a=1&b=0&i={addres}".format(addres=row[1])
+        url = "http://www.tsetmc.com/tsev2/data/Export-txt.aspx?t=i&a=1&b=0&i={" + row[1] + "}"
         print("trying")
-        downloaded_file = requests.get(id)
-        
+        downloaded_file = requests.get(url)
+
         # create a new file with jpg extension
-        add = "{name}.csv".format(name=row[1])
+        add = "{" + row[1] + "}.csv"
         save_file = open(add, 'wb')
-        
+
         # save file with content received from response
         save_file.write(downloaded_file.content)
         # close file
