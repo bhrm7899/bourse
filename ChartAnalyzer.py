@@ -1,7 +1,7 @@
 from DataCompany import DataCompany
 
 
-class CalculationsData:
+class ChartAnalyzer:
 
     def __init__(self):
         self.r = 0

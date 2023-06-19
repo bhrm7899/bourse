@@ -1,11 +1,11 @@
 import sqlite3
 from unittest import TestCase
 
-from GetDataFromDB import GetDataFromDB
-from Strategies import Strategies
+from DataExtractor import GetDataFromDB
+from Analyzer import Analyzer
 
 
-class TestStrategies(TestCase):
+class TestAnalyzer(TestCase):
     connection = sqlite3.connect('example.db')
     cursor = connection.cursor()
 
@@ -17,8 +17,8 @@ class TestStrategies(TestCase):
     getDataDB.get_all_datas_and_store(cursor)
 
     def test_bullish_engulfing(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bullish_engulfing()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bullish_engulfing()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'زماهان'), (3, ' : ', 'فخاس'), (4, ' : ', 'زكشت'),
                     (5, ' : ', 'تسه0001'), (6, ' : ', 'بالاس'), (7, ' : ', 'سيتا'), (8, ' : ', 'كخاك'),
                     (9, ' : ', 'فالوم'), (10, ' : ', 'شغدير'), (11, ' : ', 'كپرور'), (12, ' : ', 'زدشت'),
@@ -31,22 +31,22 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_bullish_engulfing_with_five_min_percent_body(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bullish_engulfing_with_five_min_percent_body()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bullish_engulfing_with_five_min_percent_body()
         expected = [(1, ' : ', 'زماهان'), (2, ' : ', 'زكشت'), (3, ' : ', 'فالوم'), (4, ' : ', 'كپرور'),
                     (5, ' : ', 'شسينا'), (6, ' : ', 'دشيمي'), (7, ' : ', 'غاذر'), (8, ' : ', 'تپمپي'),
                     (9, ' : ', 'كايتا'), (10, ' : ', 'فسرب'), (11, ' : ', 'زبينا')]
         self.assertEqual(result, expected)
 
     def test_hammer_and_bullish_engulfing(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.hammer_and_bullish_engulfing()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.hammer_and_bullish_engulfing()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'كپرور'), (3, ' : ', 'تكنار')]
         self.assertEqual(result, expected)
 
     def test_bearish_and_engulfing(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_and_engulfing()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_and_engulfing()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'زماهان'), (3, ' : ', 'فخاس'), (4, ' : ', 'زكشت'),
                     (5, ' : ', 'بالاس'), (6, ' : ', 'سيتا'), (7, ' : ', 'كخاك'), (8, ' : ', 'فالوم'),
                     (9, ' : ', 'شغدير'), (10, ' : ', 'كپرور'), (11, ' : ', 'زدشت'), (12, ' : ', 'وهور'),
@@ -58,21 +58,21 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_bearish_and_hammer_and_engulfing(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_and_hammer_and_engulfing()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_and_hammer_and_engulfing()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'كپرور')]
         self.assertEqual(result, expected)
 
     def test_bearish_and_engulfing_and_volume(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_and_engulfing_and_volume()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_and_engulfing_and_volume()
         expected = [(1, ' : ', 'زماهان'), (2, ' : ', 'واتي'), (3, ' : ', 'شيران'), (4, ' : ', 'اتكاي'),
                     (5, ' : ', 'كايتا'), (6, ' : ', 'كاذر'), (7, ' : ', 'فسرب'), (8, ' : ', 'سرو')]
         self.assertEqual(result, expected)
 
     def test_piercing_pattern_print(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.piercing_pattern_print()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.piercing_pattern_print()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'كدما'), (3, ' : ', 'حتايد'), (4, ' : ', 'زماهان'),
                     (5, ' : ', 'فخاس'), (6, ' : ', 'شگويا'), (7, ' : ', 'زكشت'), (8, ' : ', 'بالاس'),
                     (9, ' : ', 'غگلپا'), (10, ' : ', 'فالوم'), (11, ' : ', 'فاراك'), (12, ' : ', 'شغدير'),
@@ -88,8 +88,8 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_bearish_and_piercing_pattern(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_and_piercing_pattern()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_and_piercing_pattern()
         expected = [(1, ' : ', 'وسپه'), (2, ' : ', 'كدما'), (3, ' : ', 'حتايد'), (4, ' : ', 'زماهان'),
                     (5, ' : ', 'فخاس'), (6, ' : ', 'شگويا'), (7, ' : ', 'زكشت'), (8, ' : ', 'بالاس'),
                     (9, ' : ', 'غگلپا'), (10, ' : ', 'فالوم'), (11, ' : ', 'فاراك'), (12, ' : ', 'شغدير'),
@@ -103,8 +103,8 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_bearish_and_piercing_pattern_and_volume(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_and_piercing_pattern_and_volume()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_and_piercing_pattern_and_volume()
         expected = [(1, ' : ', 'زماهان'), (2, ' : ', 'شگويا'), (3, ' : ', 'فاراك'), (4, ' : ', 'كروي'),
                     (5, ' : ', 'واتي'), (6, ' : ', 'شيران'), (7, ' : ', 'اتكاي'), (8, ' : ', 'ودي'),
                     (9, ' : ', 'كايتا'), (10, ' : ', 'كاذر'), (11, ' : ', 'بوعلي'), (12, ' : ', 'فسرب'),
@@ -112,8 +112,8 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_bearish_and_morning_star(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_and_morning_star()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_and_morning_star()
         expected = [(1, ' : ', 'شستا'), (2, ' : ', 'اطلس'), (3, ' : ', 'قزوين'), (4, ' : ', 'نوري'),
                     (5, ' : ', 'آتيمس'), (6, ' : ', 'ثفارس'), (7, ' : ', 'فملي'), (8, ' : ', 'قمرو'),
                     (9, ' : ', 'كايتا'), (10, ' : ', 'وتوكا'), (11, ' : ', 'سيستم'), (12, ' : ', 'فسرب'),
@@ -121,8 +121,8 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_bearish_engulfing(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.bearish_engulfing()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.bearish_engulfing()
         expected = [(1, ' : ', 'تكنو'), (2, ' : ', 'دسبحان'), (3, ' : ', 'سكارون'), (4, ' : ', 'ثاميد'),
                     (5, ' : ', 'شپديس'), (6, ' : ', 'حتوكا'), (7, ' : ', 'ولغدر'), (8, ' : ', 'وسنا'),
                     (9, ' : ', 'غشان'), (10, ' : ', 'وپارس'), (11, ' : ', 'سمازن'), (12, ' : ', 'آسام'),
@@ -131,15 +131,15 @@ class TestStrategies(TestCase):
                     (21, ' : ', 'دپارس'), (22, ' : ', 'قشير'), (23, ' : ', 'ولصنم')]
         self.assertEqual(result, expected)
 
-    def test_hammer_and_bearish_engulfing(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.hammer_and_bearish_engulfing()
+    def test_hanging_man_and_bearish_engulfing(self):
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.hanging_man_and_bearish_engulfing()
         expected = [(1, ' : ', 'وسنا'), (2, ' : ', 'سمازن'), (3, ' : ', 'سنوين')]
         self.assertEqual(result, expected)
 
     def test_full_time_buy_queue(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.full_time_buy_queue()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.full_time_buy_queue()
         expected = [(1, ' : ', 'فملي2'), (2, ' : ', 'لپيام'), (3, ' : ', 'ثاصفا'), (4, ' : ', 'مكرما034'),
                     (5, ' : ', 'سكه0111پ05'), (6, ' : ', 'اخزا906'), (7, ' : ', 'كسرام'), (8, ' : ', 'فسديد'),
                     (9, ' : ', 'آرمان'), (10, ' : ', 'وثخوز'), (11, ' : ', 'اوصتا4'), (12, ' : ', 'صفارس307'),
@@ -150,8 +150,8 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_full_time_sell_queue(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.full_time_sell_queue()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.full_time_sell_queue()
         expected = [(1, ' : ', 'اخزا821'), (2, ' : ', 'فبستم'), (3, ' : ', 'آبين'), (4, ' : ', 'شپديس2'),
                     (5, ' : ', 'داسوه'), (6, ' : ', 'ولراز'), (7, ' : ', 'تمحركه'), (8, ' : ', 'فلامي'),
                     (9, ' : ', 'كهرام'), (10, ' : ', 'سپرمي'), (11, ' : ', 'اعتماد2'), (12, ' : ', 'ثجوان'),
@@ -162,8 +162,8 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_full_time_buy_queue_with_shadow(self):
-        stg = Strategies(20230219, self.getDataDB)
-        result = stg.full_time_buy_queue_with_shadow()
+        analyzer = Analyzer(20230219, self.getDataDB)
+        result = analyzer.full_time_buy_queue_with_shadow()
         expected = [(1, ' : ', 'سپيدما'), (2, ' : ', 'سفارود'), (3, ' : ', 'ورنا'), (4, ' : ', 'دسينا'),
                     (5, ' : ', 'ثبهساز'), (6, ' : ', 'افق ملت'), (7, ' : ', 'غپينو'), (8, ' : ', 'آساميد'),
                     (9, ' : ', 'كساپا'), (10, ' : ', 'آكورد'), (11, ' : ', 'دمعيار'), (12, ' : ', 'ثتوسا'),
@@ -172,7 +172,7 @@ class TestStrategies(TestCase):
         self.assertEqual(result, expected)
 
     def test_check(self):
-        stg = Strategies(20230219, self.getDataDB)
+        analyzer = Analyzer(20230219, self.getDataDB)
         data = [('Melli.Mortgage1803', '20180429', '633270.00', '633270.00', '633270.00', '633270.00', '1899810',
                  '3', '1', 'D', '661034.00', '633270.00', '143187001116603', 'تملي612',
                  'تسهيلات مسكن بانك ملي-اسفند96'),
@@ -191,6 +191,6 @@ class TestStrategies(TestCase):
                  '1', 'D', '666000.00', '665000.00', '143187001116603', 'تملي612', 'تسهيلات مسكن بانك ملي-اسفند96'),
                 ('Melli.Mortgage1803', '20180520', '663000.00', '663000.00', '663000.00', '663000.00', '6630000', '10',
                  '1', 'D', '665000.00', '663000.00', '143187001116603', 'تملي612', 'تسهيلات مسكن بانك ملي-اسفند96')]
-        result = stg.check(data)
+        result = analyzer.check(data)
         expected = -1
         self.assertEqual(result, expected)

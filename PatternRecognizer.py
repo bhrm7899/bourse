@@ -1,10 +1,10 @@
-from CalculationsData import CalculationsData
+from ChartAnalyzer import ChartAnalyzer
 from DataCompany import DataCompany
 
 
-class CheckCandleSymbol:
+class PatternRecognizer:
     def __init__(self):
-        self.calculationsData = CalculationsData()
+        self.calculationsData = ChartAnalyzer()
         self.r = 0
 
     @staticmethod
